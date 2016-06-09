@@ -189,12 +189,14 @@ hs_object_connection(hs_obj_t *obj TSRMLS_DC)
 
     if (!obj->conn->stream) {
         if (errstr) {
+            zend_error(E_WARNING, "HandlerSocketi: failed to connect error %d: %s", err, errstr);
             efree(errstr);
         }
         return FAILURE;
     }
 
     if (errstr) {
+        zend_error(E_NOTICE, "HandlerSocketi: %s", errstr);
         efree(errstr);
     }
 
